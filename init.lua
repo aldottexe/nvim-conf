@@ -1,11 +1,7 @@
--- Kickstart.nvim is *not* a distribution.
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Install package manager
 --    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -19,25 +15,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
+-- PLUGINS
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
+    
   -- Detect tabstop and shiftwidth automatically
   -- 'tpope/vim-sleuth',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -45,9 +32,8 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
-
+        
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
@@ -91,36 +77,18 @@ require('lazy').setup({
       end,
     },
   },
-
-  {
-    -- Theme inspired by Atom
+    -- THEMES
     'navarasu/onedark.nvim',
-    -- config = function()
-    --   vim.cmd.colorscheme 'onedark'
-    -- end,
-  },
-  -- MY THEMES
   {
     'sainnhe/everforest',
     config = function()
       vim.cmd.colorscheme 'everforest'
     end,
   },
-  {
     'nordtheme/vim',
-  },
-  {
     'franbach/miramare',
-  },
-  {
     'junegunn/seoul256.vim',
-    -- config = function()
-    --   vim.cmd.colorscheme 'seoul256'
-    -- end,
-  },
-  {
     'e-ink-colorscheme/e-ink.nvim'
-  },
 
   -- MY PLUGINS
   -- {
@@ -150,21 +118,6 @@ require('lazy').setup({
         { desc = 'change color' });
     end,
   },
-
-  -- {
-  --   -- Set lualine as statusline
-  --   'nvim-lualine/lualine.nvim',
-  --   -- See `:help lualine.txt`
-  --   opts = {
-  --     options = {
-  --       icons_enabled = false,
-  --       -- theme = 'everforest',
-  --       component_separators = '|',
-  --       section_separators = '',
-  --     },
-  --   },
-  -- },
-  --
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -242,19 +195,7 @@ require('lazy').setup({
         { desc = 'Swap to mark [6]' });
     end
   },
-
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
   require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
 
@@ -434,10 +375,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
