@@ -20,7 +20,7 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-    
+
   -- Detect tabstop and shiftwidth automatically
   -- 'tpope/vim-sleuth',
 
@@ -33,7 +33,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
-        
+
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
@@ -77,19 +77,18 @@ require('lazy').setup({
       end,
     },
   },
-    -- THEMES
-    'navarasu/onedark.nvim',
+  -- THEMES
+  'navarasu/onedark.nvim',
   {
     'sainnhe/everforest',
     config = function()
       vim.cmd.colorscheme 'everforest'
     end,
   },
-    'nordtheme/vim',
-    'franbach/miramare',
-    'junegunn/seoul256.vim',
-    'e-ink-colorscheme/e-ink.nvim'
-  },
+  'nordtheme/vim',
+  'franbach/miramare',
+  'junegunn/seoul256.vim',
+  'e-ink-colorscheme/e-ink.nvim',
   {
     'xiyaowong/transparent.nvim',
   },
