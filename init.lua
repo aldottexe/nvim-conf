@@ -89,7 +89,10 @@ require('lazy').setup({
     'franbach/miramare',
     'junegunn/seoul256.vim',
     'e-ink-colorscheme/e-ink.nvim'
-
+  },
+  {
+    'xiyaowong/transparent.nvim',
+  },
   -- MY PLUGINS
   -- {
   --   'github/copilot.vim'
@@ -100,6 +103,9 @@ require('lazy').setup({
       require('oil').setup {
         view_options = {
           show_hidden = true,
+          vim.keymap.set('n', '<leader>o',
+            function() vim.cmd([[Oil .]]) end,
+            { desc = 'browse files with oil' })
         }
       }
     end,
